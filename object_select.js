@@ -1,26 +1,69 @@
-# Native-Palette-Usage
+class Card {
+	constructor(options = {}) {
+		// options = {color: {background: hex, text: hex}, text: str}
+		// 创建 card 元素
+		this.cardElement = document.createElement("div");
+		this.cardElement.className = "card";
+		this.setColor(options.color);
 
-两个 HTML 原生元素调色盘应用示例
-[https://juejin.cn/post/7126351624032747528](https://juejin.cn/post/7126351624032747528)
+		// 创建 multi-button 容器
+		this.buttons = {};
+		const multiButton = document.createElement("div");
+		multiButton.className = "multi-button";
 
-## 1. pickr
+		// 添加 multi-button 到 card
+		this.cardElement.appendChild(multiButton);
+		// 存储 element
+		this.buttons.multiButtonElement = multiButton;
 
-一个完全原生的调色盘：https://github.com/simonwep/pickr
+		// 创建按钮
+		const button1 = document.createElement("button");
+		button1.className = "fas fa-palette";
+		multiButton.appendChild(button1);
+		this.buttons.palette_button = button1;
 
-```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/monolith.min.css" />
-<script type="importmap">
-	{
-		"imports": {
-			"@simonwep/pickr": "https://cdn.jsdelivr.net/npm/@simonwep/pickr@1.9.1/+esm"
+		const button2 = document.createElement("button");
+		button2.className = "fas fa-times";
+		multiButton.appendChild(button2);
+		this.buttons.delete_button = button2;
+
+		// 创建 card-text 元素
+		this.textElement = document.createElement("p");
+		this.textElement.className = "card-text";
+		this.setText(options.text);
+		this.cardElement.appendChild(this.textElement);
+	}
+
+	// 将 card 添加到指定的容器
+	addTo(container) {
+		container.appendChild(this.cardElement);
+	}
+
+	setColor(color = {}) {
+		this.cardElement.style.setProperty("--background", color.background || "#3c3b3d");
+		this.cardElement.style.setProperty("--text", color.textColor || "white");
+	}
+
+	setText(text) {
+		this.textElement.textContent = text || "object";
+	}
+
+	// 绑定按钮的回调函数
+	setButtonFunc(funcs = {}) {
+		if (funcs.palette) {
+			this.buttons.palette_button.addEventListener("click", funcs.palette);
+		}
+		if (funcs.delete) {
+			this.buttons.delete_button.addEventListener("click", funcs.delete);
 		}
 	}
-</script>
-```
 
-用于改变卡片的颜色：
+	destroy() {
+		this.cardElement.remove();
+	}
+}
 
-```jsx
+
 import Pickr from "@simonwep/pickr"
 
 // 定义卡片
@@ -29,6 +72,7 @@ const card1 = new Card({
 	color: {
 		background: "#42445a",
 	},
+	text: 'object_1'
 });
 card1.addTo(render_container);
 
@@ -55,28 +99,12 @@ card1.setButtonFunc({
 		card1.destroy();
 	},
 });
-```
 
-## 2. vanilla-colorful
 
-一个重构[react-colorful](https://github.com/omgovich/react-colorful)的、可类似原生元素使用的调色盘：https://github.com/web-padawan/vanilla-colorful
 
-```html
-<script type="importmap">
-	{
-		"imports": {
-			"vanilla-colorful": "https://cdn.jsdelivr.net/npm/vanilla-colorful@0.7.2/+esm"，
-			"@floating-ui/dom": "https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.10/+esm"
-		}
-	}
-</script>
-```
-
-借助定位元素的库 [https://floating-ui.com/](https://floating-ui.com/)，用于改变卡片的颜色：
-
-```jsx
 import 'vanilla-colorful';
 import { computePosition, autoPlacement } from '@floating-ui/dom';
+
 
 class Pickr_vanilla {
 	constructor(options = {}) {
@@ -146,6 +174,7 @@ class Pickr_vanilla {
 	}
 }
 
+
 // 定义卡片2
 const card2 = new Card({
 	color: {
@@ -163,4 +192,22 @@ const pickr2 = new Pickr_vanilla({
 		card2.setColor({ background: hex });
 	}
 );
-```
+
+// 绑定删除按钮的回调函数
+card2.setButtonFunc({
+	delete: () => {
+		pickr2.destroy();
+		card2.destroy();
+	},
+});
+
+
+
+class SegObjects {
+	constructor(options = {}) {}
+}
+
+export {
+	Card,
+	SegObjects
+}

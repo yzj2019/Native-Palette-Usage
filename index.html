@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="styles.css" />
+	<!-- JavaScript 模块化, 允许在不支持 ESM 的环境中使用 ESM -->
+	<script async src="https://cdn.jsdelivr.net/npm/es-module-shims@1.10.0/dist/es-module-shims.min.js"></script>
+    <!-- 调色盘 -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/monolith.min.css" />
+	<script type="importmap">
+			{
+				"imports": {
+					"jquery": "https://cdn.jsdelivr.net/npm/jquery@3.7.1/+esm",
+					"bootstrap": "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/+esm",
+					"three": "https://cdn.jsdelivr.net/npm/three@0.148.0/+esm",
+					"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.148.0/examples/jsm/",
+					"vanilla-colorful": "https://cdn.jsdelivr.net/npm/vanilla-colorful@0.7.2/+esm",
+					"@simonwep/pickr": "https://cdn.jsdelivr.net/npm/@simonwep/pickr@1.9.1/+esm",
+                    "@floating-ui/dom": "https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.10/+esm"
+				}
+			}
+		</script>
+	<script type="module" src="object_select.js"></script>
+</head>
+
+<body>
+	<div id="render_container"></div>
+</body>
+
+</html>
