@@ -5,7 +5,7 @@
 
 ## 1. pickr
 
-一个完全原生的调色盘：https://github.com/simonwep/pickr
+一个完全原生的调色盘：<https://github.com/simonwep/pickr>
 
 ```html
 <link
@@ -61,7 +61,7 @@ card1.setButtonFunc({
 
 ## 2. vanilla-colorful
 
-一个重构[react-colorful](https://github.com/omgovich/react-colorful)的、可类似原生元素使用的调色盘：https://github.com/web-padawan/vanilla-colorful
+一个重构[react-colorful](https://github.com/omgovich/react-colorful)的、可类似原生元素使用的调色盘：<https://github.com/web-padawan/vanilla-colorful>
 
 ```html
 <script type="importmap">
